@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite HVAC – Fast, Reliable Service in Danville, VA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a3a8f;
+      --navy-dark: #0f2460;
+      --navy-deeper: #091a4a;
+      --orange: #f07030;
+      --orange-light: #f5874a;
+      --yellow: #f5c518;
+      --white: #ffffff;
+      --white-soft: rgba(255,255,255,0.85);
+      --white-muted: rgba(255,255,255,0.55);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--navy-deeper);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(26,58,143,0.9) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(240,112,48,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(26,58,143,0.5) 0%, transparent 60%),
+        var(--navy-deeper);
+    }
+
+    /* subtle dot grid */
+    .bg-layer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* ── WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER STRIP ── */
+    .header {
+      padding: 32px 28px 20px;
+      text-align: center;
+      animation: fadeDown 0.6s ease both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+    }
+
+    .brand-icon {
+      font-size: 1.5rem;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+    }
+
+    /* ── PHONE BUTTON ── */
+    .phone-wrap {
+      margin: 16px 28px 0;
+      animation: fadeDown 0.6s 0.1s ease both;
+    }
+
+    .btn-phone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      border-radius: 14px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 6px 30px rgba(240,112,48,0.45), 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-phone::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 50%; height: 200%;
+      background: rgba(255,255,255,0.18);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+
+    .btn-phone:hover::before { left: 130%; }
+    .btn-phone:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(240,112,48,0.55), 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .btn-phone:active { transform: translateY(0); }
+
+    .phone-icon { font-size: 1.2rem; animation: ring 2.5s infinite; }
+
+    @keyframes ring {
+      0%,100% { transform: rotate(0); }
+      10% { transform: rotate(-15deg); }
+      20% { transform: rotate(15deg); }
+      30% { transform: rotate(-10deg); }
+      40% { transform: rotate(10deg); }
+      50% { transform: rotate(0); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 44px 28px 36px;
+      text-align: center;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.6rem, 10vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    .hero h1 .accent { color: var(--yellow); }
+
+    .hero-sub {
+      margin-top: 18px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--white-soft);
+      line-height: 1.6;
+    }
+
+    .hero-sub span {
+      display: inline-block;
+      margin: 0 4px;
+      color: var(--white);
+    }
+
+    .dot { color: var(--orange); margin: 0 6px; }
+
+    /* ── CTA BUTTONS ── */
+    .cta-group {
+      padding: 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    .btn-primary {
+      display: block;
+      text-align: center;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      border-radius: 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(240,112,48,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 40%; height: 200%;
+      background: rgba(255,255,255,0.15);
+      transform: skewX(-20deg);
+      transition: left 0.4s ease;
+    }
+    .btn-primary:hover::before { left: 130%; }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(240,112,48,0.5);
+    }
+
+    .btn-outline {
+      display: block;
+      text-align: center;
+      padding: 17px 24px;
+      border: 2.5px solid rgba(255,255,255,0.7);
+      border-radius: 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      margin: 40px 28px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    /* ── TRUST BADGES ── */
+    .badges {
+      padding: 0 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .badge:hover { background: rgba(255,255,255,0.11); transform: translateY(-3px); }
+
+    .badge-icon { font-size: 1.8rem; display: block; margin-bottom: 8px; }
+
+    .badge-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--yellow);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .badge-sub {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white-muted);
+      margin-top: 3px;
+      display: block;
+    }
+
+    .badge-full {
+      grid-column: 1 / -1;
+    }
+
+    /* ── SERVICES SECTION ── */
+    .services {
+      padding: 40px 28px 0;
+      animation: fadeUp 0.7s 0.6s ease both;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .service-item:hover { background: rgba(255,255,255,0.09); transform: translateX(4px); }
+
+    .service-emoji { font-size: 1.3rem; flex-shrink: 0; }
+
+    .service-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      flex: 1;
+    }
+
+    .service-check {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--orange);
+      background: rgba(240,112,48,0.15);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    /* ── GUARANTEE ── */
+    .guarantee {
+      margin: 40px 28px 0;
+      background: linear-gradient(135deg, rgba(240,112,48,0.18) 0%, rgba(240,112,48,0.06) 100%);
+      border: 1px solid rgba(240,112,48,0.35);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      animation: fadeUp 0.7s 0.7s ease both;
+    }
+
+    .guarantee-icon { font-size: 2.4rem; margin-bottom: 10px; display: block; }
+
+    .guarantee h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--yellow);
+      margin-bottom: 8px;
+    }
+
+    .guarantee p {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--white-soft);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      padding: 40px 28px 0;
+      text-align: center;
+      animation: fadeUp 0.7s 0.8s ease both;
+    }
+
+    .footer-cta p {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--white-muted);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .footer-cta strong { color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PULSE BADGE ── */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(240,112,48,0.2);
+      border: 1px solid rgba(240,112,48,0.4);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--orange-light);
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    /* responsive */
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 2.3rem; }
+      .brand { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <span class="brand-icon">🔧</span>
+      Elite HVAC
+    </div>
+  </div>
+
+  <!-- PHONE -->
+  <div class="phone-wrap">
+    <a href="tel:4345551234" class="btn-phone">
+      <span class="phone-icon">📞</span>
+      (434) 555-1234
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="live-badge">
+      <span class="pulse-dot"></span>
+      AVAILABLE 24/7
+    </div>
+    <h1>
+      Fast, Reliable<br>
+      <span class="accent">HVAC Service</span><br>
+      in Danville, VA
+    </h1>
+    <p class="hero-sub">
+      <span>24/7 Emergency Service</span>
+      <span class="dot">•</span>
+      <span>Same-Day Repairs</span>
+      <span class="dot">•</span>
+      <span>100% Satisfaction Guaranteed</span>
+    </p>
+  </div>
+
+  <!-- CTA BUTTONS -->
+  <div class="cta-group">
+    <a href="#contact" class="btn-primary">🗓️ Get Free Estimate</a>
+    <a href="tel:4345551234" class="btn-outline">📲 Call Now</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TRUST BADGES -->
+  <div class="badges">
+    <div class="badge">
+      <span class="badge-icon">✅</span>
+      <span class="badge-title">25+ Years</span>
+      <span class="badge-sub">Experience</span>
+    </div>
+    <div class="badge">
+      <span class="badge-icon">⭐</span>
+      <span class="badge-title">4.9 Stars</span>
+      <span class="badge-sub">200+ Reviews</span>
+    </div>
+    <div class="badge badge-full">
+      <span class="badge-icon">🏆</span>
+      <span class="badge-title">Licensed &amp; Insured</span>
+      <span class="badge-sub">Fully certified in Virginia</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="services">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">Our Services</div>
+    <div class="service-list">
+      <div class="service-item">
+        <span class="service-emoji">❄️</span>
+        <span class="service-name">AC Repair &amp; Installation</span>
+        <span class="service-check">Same Day</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🔥</span>
+        <span class="service-name">Heating &amp; Furnace Repair</span>
+        <span class="service-check">Same Day</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🌀</span>
+        <span class="service-name">HVAC Maintenance Tune-Up</span>
+        <span class="service-check">Scheduled</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">💨</span>
+        <span class="service-name">Air Quality &amp; Duct Cleaning</span>
+        <span class="service-check">Available</span>
+      </div>
+      <div class="service-item">
+        <span class="service-emoji">🚨</span>
+        <span class="service-name">24/7 Emergency Calls</span>
+        <span class="service-check">Always On</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUARANTEE -->
+  <div class="guarantee">
+    <span class="guarantee-icon">🛡️</span>
+    <h3>100% Satisfaction Guarantee</h3>
+    <p>Not happy? We'll come back and make it right — <strong>at no extra charge.</strong> Your comfort is our commitment.</p>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta" id="contact">
+    <div class="cta-group" style="padding:0;">
+      <a href="tel:4345551234" class="btn-phone" style="border-radius:14px; font-size:1.1rem;">
+        <span class="phone-icon">📞</span> Call (434) 555-1234
+      </a>
+      <a href="#contact" class="btn-primary">✉️ Request a Free Estimate</a>
+    </div>
+    <p><strong>Serving Danville, VA</strong> and surrounding areas.<br>Family-owned. Always reliable. Always here.</p>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
